@@ -7,7 +7,7 @@ Tensorflow implmentations of
 5. Dual Attention ResUnet, https://arxiv.org/abs/1809.02983
 6. Attention Gates ResUnet, https://arxiv.org/abs/1909.10360
 
-Requirements:
+Requirements:  
 Python 3  
 Tensorflow tested on 1.9.0  
 numpy
