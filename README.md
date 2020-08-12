@@ -8,6 +8,6 @@ Tensorflow implmentations of
 6. Attention Gates ResUnet, https://arxiv.org/abs/1909.10360
 
 Requirements:
-Python 3
-Tensorflow tested on 1.9.0
+Python 3  
+Tensorflow tested on 1.9.0  
 numpy
