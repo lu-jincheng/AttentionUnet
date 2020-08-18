@@ -432,7 +432,7 @@ class Trainer(object):
             mean_iou3 = mean_iou3 / test_size
             logging.info("Test Loss: {:.4f}, Dice: {:.4f}, IoU: {:.4f}".format(loss, mean_dice, mean_iou))
             logging.info(
-                "Dice1: {:.4f}, Dice2: {:.4f}, Dice3: {:.4f},IoU2: {:.4f}, IoU1: {:.4f}, IoU3: {:.4f}".format(
+                "Dice1: {:.4f}, Dice2: {:.4f}, Dice3: {:.4f}, IoU1: {:.4f}, IoU2: {:.4f}, IoU3: {:.4f}".format(
                     mean_dice1, mean_dice2, mean_dice3, mean_iou1, mean_iou2, mean_iou3))
             return mean_dice, mean_iou
 
