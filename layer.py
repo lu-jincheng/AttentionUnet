@@ -470,16 +470,19 @@ def dense_block(input, w, b, keep_prob_, is_training):
     return conv8
 
 
-def attention_gate(input, att_input, w, b, keep_prob_):
-    g1 = conv2d(input, w[0], b[0], keep_prob_)
-    x1 = conv2d(att_input, w[1], b[1], keep_prob_)
-    net = tf.add(g1, x1)
-    net = tf.nn.relu(net)
-    net = conv2d(net, w[2], b[2], keep_prob_)
-    net = tf.nn.sigmoid(net)
-    # net = tf.concat([att_tensor, net], axis=-1)
-    net = net * att_input
-    return net
+def attention_gate(hi_input, lo_input, filters, keep_prob_):
+    hi_channel_att = global_avg_pool(hi_input, name='hi_channel_att')
+    lo_channel_att = global_avg_pool(lo_input, name='lo_channel_att')
+    hi_channel_att = tf.layers.conv2d(hi_channel_att, filters, 1, padding='same', kernel_initializer='he_normal')
+    hi_channel_att = tf.nn.relu(hi_channel_att)
+    lo_channel_att = tf.layers.conv2d(lo_channel_att, filters, 1, padding='same', kernel_initializer='he_normal')
+    lo_channel_att = tf.nn.relu(lo_channel_att)
+    att = tf.add(hi_channel_att, lo_channel_att)
+    att = tf.layers.conv2d(att, filters, 1, padding='same', kernel_initializer='he_normal')
+    att = tf.nn.softmax(att)
+    output = att * lo_input
+    output = tf.concat([hi_input, output], 3)
+    return output
 
 
 def pam_model(input, h, w, filters):

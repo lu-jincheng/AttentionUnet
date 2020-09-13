@@ -185,25 +185,25 @@ def create_attention_gate_unet(x, keep_prob, channels, layers=5, n_class=4, feat
 
     # Up layers
     up10 = tf.nn.relu(deconv2d(conv10, wd10, pool_size) + bd10)
-    att10 = attention_gate(conv8, up10, wa10, ba10, keep_prob)
+    att10 = attention_gate(conv8, up10, 512, keep_prob)
     merge10 = crop_and_concat(conv8, att10)
     conv11 = conv2d_relu(merge10, w11, b11, keep_prob, is_training)
     conv12 = conv2d_relu(conv11, w12, b12, keep_prob, is_training)
 
     up12 = tf.nn.relu(deconv2d(conv12, wd12, pool_size) + bd12)
-    att12 = attention_gate(conv6, up12, wa12, ba12, keep_prob)
+    att12 = attention_gate(conv6, up12, 256, keep_prob)
     merge12 = crop_and_concat(conv6, att12)
     conv13 = conv2d_relu(merge12, w13, b13, keep_prob, is_training)
     conv14 = conv2d_relu(conv13, w14, b14, keep_prob, is_training)
 
     up14 = tf.nn.relu(deconv2d(conv14, wd14, pool_size) + bd14)
-    att14 = attention_gate(conv4, up14, wa14, ba14, keep_prob)
+    att14 = attention_gate(conv4, up14, 128, keep_prob)
     merge14 = crop_and_concat(conv4, att14)
     conv15 = conv2d_relu(merge14, w15, b15, keep_prob, is_training)
     conv16 = conv2d_relu(conv15, w16, b16, keep_prob, is_training)
 
     up16 = tf.nn.relu(deconv2d(conv16, wd16, pool_size) + bd16)
-    att16 = attention_gate(conv2, up16, wa16, ba16, keep_prob)
+    att16 = attention_gate(conv2, up16, 64, keep_prob)
     merge16 = crop_and_concat(conv2, att16)
     conv17 = conv2d_relu(merge16, w17, b17, keep_prob, is_training)
     conv18 = conv2d_relu(conv17, w18, b18, keep_prob, is_training)
@@ -620,22 +620,22 @@ def create_attention_gate_res_unet(x, keep_prob, channels, layers, n_class=4, fe
 
     # Up layers
     up6 = tf.nn.relu(deconv2d(res5, wd6, pool_size) + bd6)
-    att6 = attention_gate(res4, up6, wa6, ba6, keep_prob)
+    att6 = attention_gate(res4, up6, 512, keep_prob)
     merge6 = crop_and_concat(res4, att6)
     conv6 = basic_block(merge6, w6, b6, keep_prob, is_training)
 
     up7 = tf.nn.relu(deconv2d(conv6, wd7, pool_size) + bd7)
-    att7 = attention_gate(res3, up7, wa7, ba7, keep_prob)
+    att7 = attention_gate(res3, up7, 256, keep_prob)
     merge7 = crop_and_concat(res3, att7)
     conv7 = basic_block(merge7, w7, b7, keep_prob, is_training)
 
     up8 = tf.nn.relu(deconv2d(conv7, wd8, pool_size) + bd8)
-    att8 = attention_gate(res2, up8, wa8, ba8, keep_prob)
+    att8 = attention_gate(res2, up8, 128, keep_prob)
     merge8 = crop_and_concat(res2, att8)
     conv8 = basic_block(merge8, w8, b8, keep_prob, is_training)
 
     up9 = tf.nn.relu(deconv2d(conv8, wd9, pool_size) + bd9)
-    att9 = attention_gate(res1, up9, wa9, ba9, keep_prob)
+    att9 = attention_gate(res1, up9, 64, keep_prob)
     merge9 = crop_and_concat(res1, att9)
     conv9 = basic_block(merge9, w9, b9, keep_prob, is_training)
 
